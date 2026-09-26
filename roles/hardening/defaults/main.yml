@@ -1,6 +1,6 @@
 ---
 ssh_port: 22
-ssh_admin_user: k4ips
+ssh_admin_user: admin
 
 ssh_public_key: >-
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmwp3Ic5RTSbtSCDzA5LEmOE7B5YuetCuPI4Iy4mWos

@@ -7,6 +7,13 @@
     groups: sudo
     append: true
     state: present
+    
+- name: Allow passwordless sudo
+  ansible.builtin.copy:
+    content: "{{ ssh_admin_user }} ALL=(ALL) NOPASSWD: ALL\n"
+    dest: "/etc/sudoers.d/{{ ssh_admin_user }}"
+    mode: "0440"
+    validate: "visudo -cf %s"
 
 - name: Create .ssh directory
   ansible.builtin.file:

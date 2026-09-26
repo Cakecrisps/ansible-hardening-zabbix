@@ -12,3 +12,11 @@
 
   roles:
     - nginx
+
+- name: ZabbixConf
+  hosts: zabbix
+  become: true
+
+  roles:
+    - hardening
+    - zabbix_server
