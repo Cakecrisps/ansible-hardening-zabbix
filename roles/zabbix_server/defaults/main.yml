@@ -1,0 +1,6 @@
+---
+zabbix_db_password: "{{ lookup('ansible.builtin.ini', 'zabbix_db_password type=properties file=.env') }}"
+zabbix_server_name: "{{ lookup('ansible.builtin.ini', 'zabbix_server_name type=properties file=.env') }}"
+zabbix_admin_password: "{{ lookup('ansible.builtin.ini', 'zabbix_admin_password type=properties file=.env') }}"
+zabbix_admin_password_hash: "{{ lookup('ansible.builtin.ini', 'zabbix_admin_password_hash type=properties file=.env') }}"
+deb_repo_url: "https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest+debian13_all.deb"

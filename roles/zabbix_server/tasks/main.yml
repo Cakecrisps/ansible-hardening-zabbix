@@ -1,0 +1,13 @@
+---
+- name: Check .env
+  ansible.builtin.fail:
+    msg: "ERORR: File .env does not exist!"
+  when: not ('.env') is file
+  run_once: true
+  delegate_to: localhost
+
+- name: Install zabbix
+  ansible.builtin.import_tasks: install_zabbix_server.yml
+
+- name: Configure панели zabbix
+  ansible.builtin.import_tasks: conf_server.yml

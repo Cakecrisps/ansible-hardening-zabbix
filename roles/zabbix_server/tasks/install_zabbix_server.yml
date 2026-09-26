@@ -1,0 +1,67 @@
+---
+- name: Install .deb zabbix
+  ansible.builtin.apt:
+    deb: "{{ deb_repo_url }}"
+    state: present
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install dependencies zabbix
+  ansible.builtin.apt:
+    name:
+      - mariadb-server
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-apache-conf
+      - zabbix-sql-scripts
+      - zabbix-agent
+      - python3-pymysql 
+    state: present
+
+- name: Create БД
+  community.mysql.mysql_db:
+    name: zabbix
+    encoding: utf8mb4
+    collation: utf8mb4_bin
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Create user
+  community.mysql.mysql_user:
+    name: zabbix
+    password: "{{ zabbix_db_password }}"
+    priv: "zabbix.*:ALL"
+    host: "localhost"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Set log_bin_trust
+  community.mysql.mysql_variables:
+    variable: log_bin_trust_function_creators
+    value: '1'
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Check DB
+  ansible.builtin.command: >
+    mariadb -u zabbix -p'{{ zabbix_db_password }}' zabbix -e "SHOW TABLES LIKE 'users';"
+  register: zabbix_tables
+  changed_when: false
+  failed_when: false
+
+- name: Import DB schema
+  ansible.builtin.shell: >
+    zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz |
+    mariadb --default-character-set=utf8mb4 -u zabbix -p'{{ zabbix_db_password }}' zabbix
+  when: "'users' not in zabbix_tables.stdout"
+
+
+- name: Change .conf
+  ansible.builtin.template:
+    src: zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Restart apache and zabbixs units

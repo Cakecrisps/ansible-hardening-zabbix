@@ -1,0 +1,18 @@
+---
+- name: Conf web server
+  ansible.builtin.template:
+    src: zabbix.conf.php.j2
+    dest: /etc/zabbix/web/zabbix.conf.php
+    owner: root
+    group: root
+    mode: "644"
+
+- name: Change default для Admin
+  community.mysql.mysql_query:
+    login_db: zabbix
+    login_user: zabbix
+    login_password: "{{ zabbix_db_password }}"
+    query: >
+      UPDATE users
+      SET passwd = '{{ zabbix_admin_password | password_hash("bcrypt") }}'
+      WHERE username = 'Admin';
