@@ -1,9 +1,9 @@
 ---
-- name: Добавление хоста в Zabbix Server через API
+- name: Add host to server via API
   community.zabbix.zabbix_host:
     host_name: "{{ ansible_hostname }}_{{ ansible_default_ipv4.address }}"
     visible_name: "{{ ansible_hostname }}_{{ ansible_default_ipv4.address }}"
-    description: "Добавлено автоматически через Ansible"
+    description: "Add by Ansible"
     host_groups:
       - "Linux servers"
     link_templates:

@@ -7,7 +7,7 @@
     group: root
     mode: "644"
 
-- name: Change default для Admin
+- name: Change default for Admin
   community.mysql.mysql_query:
     login_db: zabbix
     login_user: zabbix

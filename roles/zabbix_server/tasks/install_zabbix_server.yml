@@ -20,7 +20,7 @@
       - python3-pymysql 
     state: present
 
-- name: Create БД
+- name: Create DB
   community.mysql.mysql_db:
     name: zabbix
     encoding: utf8mb4
