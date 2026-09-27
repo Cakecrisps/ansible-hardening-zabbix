@@ -8,7 +8,7 @@
     mode: "644"
 
 - name: Change default for Admin
-  community.mysql.mysql_query:
+  ansible.mysql.mysql_query:
     login_db: zabbix
     login_user: zabbix
     login_password: "{{ zabbix_db_password }}"

@@ -21,7 +21,7 @@
     state: present
 
 - name: Create DB
-  community.mysql.mysql_db:
+  ansible.mysql.mysql_db:
     name: zabbix
     encoding: utf8mb4
     collation: utf8mb4_bin
@@ -29,7 +29,7 @@
     login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: Create user
-  community.mysql.mysql_user:
+  ansible.mysql.mysql_user:
     name: zabbix
     password: "{{ zabbix_db_password }}"
     priv: "zabbix.*:ALL"
@@ -38,7 +38,7 @@
     login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: Set log_bin_trust
-  community.mysql.mysql_variables:
+  ansible.mysql.mysql_variables:
     variable: log_bin_trust_function_creators
     value: '1'
     login_unix_socket: /run/mysqld/mysqld.sock
