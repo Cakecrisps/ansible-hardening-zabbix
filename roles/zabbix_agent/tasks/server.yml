@@ -26,3 +26,4 @@
     ansible_httpapi_use_ssl: false
     ansible_zabbix_url_path: "zabbix"
   delegate_to: localhost
+  become: false

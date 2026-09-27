@@ -12,3 +12,6 @@
     group: root
     mode: "644"
   notify: RestartEnableAgent
+
+- name: Flush Handlers
+  meta: flush_handlers
