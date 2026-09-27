@@ -14,7 +14,7 @@
     - nginx
 
 - name: ZabbixConf
-  hosts: zabbix
+  hosts: zabbix-server
   become: true
 
   roles:
