@@ -1,5 +1,7 @@
 # ansible_templates
 
+![CI](https://github.com/Cakecrisps/ansible_templates/actions/workflows/ci.yml/badge.svg)
+
 Набор Ansible-плейбуков и ролей для эксплуатации небольшого Linux-стенда:
 базовый хардненинг серверов, разворачивание Nginx и полный цикл установки
 Zabbix Server + автоматическая регистрация агентов через Zabbix API.
