@@ -1,0 +1,28 @@
+---
+- name: Добавление хоста в Zabbix Server через API
+  community.zabbix.zabbix_host:
+    host_name: "{{ ansible_hostname }}_{{ ansible_default_ipv4.address }}"
+    visible_name: "{{ ansible_hostname }}_{{ ansible_default_ipv4.address }}"
+    description: "Добавлено автоматически через Ansible"
+    host_groups:
+      - "Linux servers"
+    link_templates:
+      - "Linux by Zabbix agent"
+    interfaces:
+      - type: 1  # 1 = Agent interface
+        main: 1
+        useip: 1
+        ip: "{{ ansible_default_ipv4.address }}"
+        dns: ""
+        port: "10050"
+    status: enabled
+    state: present
+  vars:
+    ansible_connection: httpapi
+    ansible_network_os: community.zabbix.zabbix
+    ansible_host: "{{ zabbix_server_ip }}"
+    ansible_user: "Admin"
+    ansible_httpapi_pass: "{{ zabbix_admin_password }}"
+    ansible_httpapi_use_ssl: false
+    ansible_zabbix_url_path: "zabbix"
+  delegate_to: localhost

@@ -1,0 +1,14 @@
+---
+- name: Check .env
+  ansible.builtin.fail:
+    msg: "ERORR: File .env does not exist!"
+  when: not ('.env') is file
+  run_once: true
+  delegate_to: localhost
+
+- name: Client setup
+  ansible.builtin.import_tasks: client.yml
+
+
+- name: Server setup
+  ansible.builtin.import_tasks: server.yml

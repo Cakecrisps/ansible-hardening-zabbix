@@ -1,0 +1,2 @@
+zabbix_server_ip: "{{ lookup('ansible.builtin.ini', 'zabbix_server_ip type=properties file=.env') }}"
+zabbix_admin_password: "{{ lookup('ansible.builtin.ini', 'zabbix_admin_password type=properties file=.env') }}"

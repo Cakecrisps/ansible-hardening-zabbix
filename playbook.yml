@@ -20,3 +20,11 @@
   roles:
     - hardening
     - zabbix_server
+
+- name: BaseConfig
+  hosts: zabbix-agent
+  become: true
+
+  roles:
+    - hardening
+    - zabbix_agent
