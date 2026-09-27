@@ -8,6 +8,10 @@
 
 - name: Install zabbix
   ansible.builtin.import_tasks: install_zabbix_server.yml
+  tags:
+    - install
 
 - name: Configure панели zabbix
   ansible.builtin.import_tasks: conf_server.yml
+  tags:
+   - setup

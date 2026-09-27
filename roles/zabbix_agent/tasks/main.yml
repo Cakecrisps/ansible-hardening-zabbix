@@ -8,7 +8,10 @@
 
 - name: Client setup
   ansible.builtin.import_tasks: client.yml
-
+  tags:
+    - client
 
 - name: Server setup
   ansible.builtin.import_tasks: server.yml
+  tags:
+    - server

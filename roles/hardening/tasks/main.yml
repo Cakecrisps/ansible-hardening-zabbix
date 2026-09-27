@@ -1,9 +1,14 @@
 ---
 - name: Configure SSH
   ansible.builtin.import_tasks: ssh.yml
+  tags:
+    - ssh
 
 - name: Create administrative user
   ansible.builtin.import_tasks: user.yml
-
+  tags:
+    - user
 - name: Configure auditd
   ansible.builtin.import_tasks: auditd.yml
+  tags:
+    - auditd
